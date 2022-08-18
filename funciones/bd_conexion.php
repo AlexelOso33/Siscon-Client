@@ -1,8 +1,8 @@
 <?php
 
     // Conexión Admin
-    $user = 'sisconsy_pol_onl_admin';
-    $password = 'polietileno25@33';
+    $user = 'admin_siscon';
+    $password = 'alex3344/';
     $db = 'sisconsy_admin_data';
     $host = 'localhost';
     

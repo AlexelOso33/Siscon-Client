@@ -5,16 +5,13 @@
     $cliente = $_GET['c'];
     $bd = "sisconsy_".$bd;
     $pass_hashed = $_GET['vh'];
+    // die($bd);
 
     if(!password_verify($vid, $pass_hashed)){
         die('No estas autorizado para ver cualquier comprobante.');
     } else {
 
-        // Conexión para venta
-        $user = 'sisconsy_pol_onl_admin';
-        $password = 'polietileno25@33';
-        $host = 'localhost';
-        
+        // Conexión para venta        
         $conn = mysqli_connect($host, $user, $password, $bd);
         $conn->set_charset("utf8");
 
@@ -48,8 +45,10 @@
                 $cuenta_tot = 0;
                 $medio_c = $v['medio_creacion'];
                 $tipo_fact = strtoupper($v['comprobante']);
-                $presup = $v['n_presupuesto'];
+                $presup = $v['n_venta'];
                 $uv = $v['n_venta'];
+                $fecha = $v['fec_modif_venta'];
+                $fecha = date('d/m/Y', strtotime($fecha));
                 if($tipo_fact == 'X'){
                     if($presup !== 0){
                         $tipo = 'Presupuesto';
@@ -151,10 +150,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vista de comprobantes | <?php echo $razon; ?></title>
-    <link rel="stylesheet" href="https://siscon-system.com/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://siscon-system.com/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="https://siscon-system.com/css/main.css">
-    <link rel="Shortcut Icon" href="https://siscon-system.com/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://app.sisconsystem.online/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://app.sisconsystem.online/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://app.sisconsystem.online/css/main.css">
+    <link rel="Shortcut Icon" href="https://app.sisconsystem.online/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
         @page {
@@ -232,7 +231,7 @@
                 <?php if(is_null($imagen)){
                     echo "<h1 class='h1-fact'>".$razon."</h1>";
                  } else { ?>
-                    <img src="https://siscon-system.com/<?php echo $imagen; ?>" alt="User Image">
+                    <img src="https://app.sisconsystem.online/<?php echo $imagen; ?>" alt="User Image">
                 <?php } ?>
                 <div class="data-prestador">
                     <?php if(!is_null($fb)){ ?>
@@ -256,7 +255,7 @@
                         </tr>
                         <tr>
                             <td><h5><u>Fecha</u>:</h5></td> 
-                            <td><b><?php echo $hoy; ?></b></td>
+                            <td><b><?php echo $fecha; ?></b></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -371,9 +370,9 @@
     </div>
 
 </body>
-<script src="https://siscon-system.com/js/jquery.min.js"></script>
-<script src="https://siscon-system.com/js/bootstrap.min.js"></script>
-<script src="https://siscon-system.com/js/jquery.dataTables.min.js"></script>
-<script src="https://siscon-system.com/js/dataTables.bootstrap.min.js"></script>
+<script src="https://app.sisconsystem.online/js/jquery.min.js"></script>
+<script src="https://app.sisconsystem.online/js/bootstrap.min.js"></script>
+<script src="https://app.sisconsystem.online/js/jquery.dataTables.min.js"></script>
+<script src="https://app.sisconsystem.online/js/dataTables.bootstrap.min.js"></script>
 </html>
 <?php } ?>
